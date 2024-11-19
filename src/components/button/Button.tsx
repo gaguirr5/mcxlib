@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import MuiButton from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
@@ -19,7 +19,7 @@ const StyledButton = styled(MuiButton)<{ primary?: boolean }>(({ theme, primary 
   },
 }));
 
-const Button: React.FC<ButtonProps> = ({ text, primary, size, disabled, onClick }) => {
+const Button = ({ text, primary, size, disabled, onClick }:ButtonProps) => {
   return (
     <StyledButton
       variant="contained"

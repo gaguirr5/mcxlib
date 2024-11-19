@@ -12,7 +12,7 @@ const Example: FC<ButtonProps> = ({
   text = "Button",
 }) => {
   return (
-    <ThemeProvider theme={theme}>
+    // <ThemeProvider theme={theme}>
       <div
         style={{
           display: "flex",
@@ -29,7 +29,7 @@ const Example: FC<ButtonProps> = ({
           primary={primary}
         />
       </div>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 };
 
