@@ -18,12 +18,10 @@ const UserProfile = ({username, userEmail}:UserProfileProps) => {
             flexWrap: 'wrap',
           }}
         >
-          <Typography sx={{ color: '#929497', fontSize: '.6rem' }}>{titleName}</Typography>
-          {/* <Typography sx={{ color: theme.palette.readOnly.main, fontSize: '.6rem' }}>{titleName}</Typography> */}
+          <Typography sx={{ color: theme.palette.readOnlyText.main, fontSize: '.6rem' }}>{titleName}</Typography>
           <Typography
             sx={{
-              color: '#000',
-              // color: theme.palette.fonpm rmBgColor.contrastText,
+              color: theme.palette.pageBackground.contrastText,
               fontSize: '.9rem',
               width: '100%',
               wordBreak: 'break-all',
@@ -38,8 +36,9 @@ const UserProfile = ({username, userEmail}:UserProfileProps) => {
   
   return (
     <>
-      <Card>
+      <Card sx={{width:'100%'}}>
         <CardContent>
+          <Stack flexDirection='row'>
           {!isMobile && (
             <Box maxWidth={345} display='flex' marginRight='2rem' alignItems='center'>
               <PersonIcon sx={{ fontSize: 80, color: 'primary.main' }} />
@@ -47,10 +46,9 @@ const UserProfile = ({username, userEmail}:UserProfileProps) => {
           )}
 
           <Stack flexDirection='column'>
-            {/* <Box marginBottom='.5rem'>{InfoField('User Name', 'user name')}</Box> */}
             <Box marginBottom='.5rem'>{InfoField('Group', username || 'N/A')}</Box>
-            {/* <Box>{InfoField('Email', 'user name')}</Box> */}
             <Box>{InfoField('Email', userEmail || 'N/A')}</Box>
+          </Stack>
           </Stack>
         </CardContent>
       </Card>

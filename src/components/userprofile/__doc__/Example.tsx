@@ -1,10 +1,9 @@
 import { Box } from '@mui/material'
-// import React from 'react'
 import UserProfile, { UserProfileProps } from '../UserProfile'
 
 const Example = ({username, userEmail}:UserProfileProps) =>{
     return (
-        <Box sx={{display:'flex'}}>
+        <Box sx={{display:'flex', width:'100%'}}>
             <UserProfile username={username} userEmail={userEmail}/>
         </Box>
     )
