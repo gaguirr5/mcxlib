@@ -1,8 +1,7 @@
 import { Meta, Story, Canvas } from "@storybook/blocks";
-import Example from "./Example";
-import UserProfile from "../UserProfile";
+import * as UserProfileStories from "./UserProfile.stories"; // Import all exported stories
 
-<Meta title="Pages/UserProfile" component={UserProfile} />
+<Meta title="Pages/UserProfile" of={UserProfileStories} />
 
 # UserProfile
 
@@ -12,7 +11,9 @@ A `UserProfile` component that displays user information in a styled card. It is
 
 ## Example
 
-
+<Canvas>
+  <Story name="Default" of={UserProfileStories.Default} />
+</Canvas>
 
 ---
 
@@ -24,7 +25,12 @@ To use the `UserProfile` component in your project, import it as follows:
 import UserProfile from "@gaguirr5/mcxlib/components/userprofile";
 
 const Example = () => {
-  return <UserProfile />;
+  return (
+    <UserProfile 
+      username='Jane Doe'
+      userEmail='Jane@doe.com'
+    />
+  );
 };
 
 export default Example;

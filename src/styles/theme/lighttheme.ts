@@ -70,7 +70,7 @@ const lighttheme = createTheme({
     info: {
       main: '#002bba',
     },
-    
+
     logout: {
       main: '#0088ba',
       contrastText: '#fff',
@@ -104,7 +104,7 @@ const lighttheme = createTheme({
       contrastText: '#fff',
     },
 
-    statusaApproved: {
+    statusApproved: {
       main: '#00ba8f',
       light: '#33C7A5',
       dark: '#008264',

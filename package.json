@@ -1,8 +1,8 @@
 {
   "name": "@gaguirr5/mcxlib",
   "publishConfig": {
-  "registry": "https://npm.pkg.github.com/@gaguirr5"
-},
+    "registry": "https://npm.pkg.github.com/@gaguirr5"
+  },
   "version": "1.0.0",
   "description": "",
   "type": "module",

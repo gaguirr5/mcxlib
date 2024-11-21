@@ -41,7 +41,7 @@ const UserProfile = ({username, userEmail}:UserProfileProps) => {
           <Stack flexDirection='row'>
           {!isMobile && (
             <Box maxWidth={345} display='flex' marginRight='2rem' alignItems='center'>
-              <PersonIcon sx={{ fontSize: 80, color: 'primary.main' }} />
+              <PersonIcon sx={{ fontSize: 80, color: 'primary.main' }} data-testid='PersonIcon'/>
             </Box>
           )}
 
