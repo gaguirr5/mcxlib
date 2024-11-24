@@ -27,15 +27,24 @@ const lighttheme = createTheme({
     },
     gridBackground: {
       main: '#fff',
+      light:'',
+      dark:'#AEAEAE',
       contrastText: '#000000',
     },
     pageBackground: {
       main: '#fff',
+      
       contrastText: '#000000',
     },
     navbarBackground: {
       main: '#002244',
       contrastText: '#F9F6EE',
+    },
+    gridHead:{
+      main:'#f9f9f9',
+      light:'#FAFAFA',
+      dark:'#AEAEAE',
+      contrastText:'rgba(0,0,0,.87)'
     },
 
     //buttons

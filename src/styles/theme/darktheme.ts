@@ -27,6 +27,8 @@ const darktheme = createTheme({
 
     gridBackground: {
       main: '#424242',
+      light:'',
+      dark:'#2E2E2E',
       contrastText: '#CCCCCC',
     },
 
@@ -38,6 +40,13 @@ const darktheme = createTheme({
     navbarBackground: {
       main: '#222222',
       contrastText: '#CCCCCC',
+    },
+
+    gridHead:{
+      main:'#4c4c4c',
+      light:'#6F6F6F',
+      dark:'#353535',
+      contrastText:'#CCC'
     },
 
     //buttons

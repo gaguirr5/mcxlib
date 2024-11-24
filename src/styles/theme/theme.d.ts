@@ -21,6 +21,7 @@ declare module '@mui/material/styles' {
     requiredFieldText: Palette['primary'];
     // tabs: Palette['primary'];
     navbarBackground: Palette['primary'];
+    gridHead:Palette['primary']
   }
 
   interface PaletteOptions {
@@ -42,6 +43,7 @@ declare module '@mui/material/styles' {
     requiredFieldText?: PaletteOptions['primary'];
     // tabs?: PaletteOptions['primary'];
     navbarBackground?: PaletteOptions['primary'];
+    gridHead?:PaletteOptions['primary']
   }
 }
 
@@ -66,5 +68,6 @@ declare module '@mui/material/Button' {
     requiredFieldText: true;
     // tabs: true;
     navbarBackground: true;
+    gridHead:true;
   }
 }

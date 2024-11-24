@@ -1,5 +1,5 @@
 import {
-  useMediaQuery,
+  // useMediaQuery,
   useTheme,
   Table,
   TableBody,
@@ -15,12 +15,11 @@ import {
   Avatar,
   TablePagination,
   TableFooter,
+  Menu,
+  MenuItem,
 } from '@mui/material';
 import { MoreHorzIcon, PersonIcon } from '../../icons';
-import { grey } from '@mui/material/colors';
 import { useState } from 'react';
-// import { purple } from '@mui/material/colors';
-//usersListRole
 
 export interface UsersListProps {
   listData: {
@@ -34,13 +33,15 @@ export interface UsersListProps {
 
 const UserProfile = ({ listData }: UsersListProps) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleAnchorEl = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  // const handleChangePage = (_event: HTMLButtonElement | null, newPage: number,) => {
-  //   setPage(newPage);
-  // };
   const TableBodySX = {
     '& .MuiTableRow-root:first-of-type td': {
       borderTop: '1px solid', // Apply border only to the top edge
@@ -73,6 +74,10 @@ const UserProfile = ({ listData }: UsersListProps) => {
     setPage(0);
   };
 
+  const handleCloseAnchor = () => {
+    setAnchorEl(null);
+  };
+
   const userComponent = (name: string, group: string, email: string) => {
     return (
       <Stack flexDirection='row' alignItems='stretch' padding={1}>
@@ -84,7 +89,11 @@ const UserProfile = ({ listData }: UsersListProps) => {
             marginRight: '.5rem',
           }}
         >
-          <Avatar sx={{ bgcolor: '#604FF9', fontSize: '2rem' }}>
+          {/* <Avatar sx={{ background: 'radial-gradient(circle, rgba(0,136,186,1) 0%, rgba(146,148,151,1) 100%)', fontSize: '2rem' }}> */}
+          {/* <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(146,148,151,1) 100%)', fontSize: '2rem' }}> */}
+          <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(96,79,249,1) 100%)', fontSize: '2rem' }}>
+          {/* <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(50,0,186,1) 100%)', fontSize: '2rem' }}> */}
+          {/* <Avatar sx={{ bgcolor: '#604FF9', fontSize: '2rem' }}> */}
             <PersonIcon />
           </Avatar>
         </Box>
@@ -131,9 +140,17 @@ const UserProfile = ({ listData }: UsersListProps) => {
 
   return (
     <>
-      <TableContainer component={Paper} sx={{ borderRadius: '1rem', overflowX:'auto', overflowY:'hidden' }}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          borderRadius: '1rem',
+          overflowX: 'auto',
+          backgroundColor: theme.palette.gridBackground.main,
+          color: theme.palette.gridBackground.contrastText,
+        }}
+      >
         <Table sx={{ width: '100%', borderCollapse: 'separate', borderSpacing: 0 }}>
-          <TableHead sx={{ backgroundColor: '#f9f9f9', '& th': { borderBottom: 'none' } }}>
+          <TableHead sx={{ backgroundColor: theme.palette.gridHead.main, '& th': { borderBottom: 'none' } }}>
             <TableRow>
               <TableCell sx={{ fontSize: '.7rem', padding: '.5rem' }}>User</TableCell>
               <TableCell sx={{ fontSize: '.7rem', padding: '.5rem' }}>Roles</TableCell>
@@ -148,15 +165,22 @@ const UserProfile = ({ listData }: UsersListProps) => {
                 </TableCell>
                 <TableCell sx={{ fontSize: '.8rem' }}>{item.roles.join(',')}</TableCell>
                 <TableCell sx={{ padding: 0, width: '1px' }}>
-                  <IconButton>
-                    <MoreHorzIcon sx={{ bgcolor: grey[300], borderRadius: '.5rem' }} />
+                  <IconButton
+                    id='basic-button'
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup='true'
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleAnchorEl}
+                  >
+                    <MoreHorzIcon sx={{ bgcolor: theme.palette.formBackground.light, borderRadius: '.5rem' }} />
+                    {/* <MoreHorzIcon sx={{ bgcolor: grey[300], borderRadius: '.5rem' }} /> */}
                   </IconButton>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
           <TableFooter>
-            <TableRow >
+            <TableRow>
               <TablePagination
                 rowsPerPageOptions={[100, 200, 500, { label: 'All', value: -1 }]}
                 count={listData.length}
@@ -169,6 +193,23 @@ const UserProfile = ({ listData }: UsersListProps) => {
           </TableFooter>
         </Table>
       </TableContainer>
+      <Menu
+        id='basic-menu'
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleCloseAnchor}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+        slotProps={{
+          paper:{
+          sx:{borderRadius:'.5rem'}
+        }}}
+      >
+        <MenuItem>View Profile</MenuItem>
+        <MenuItem sx={{ color: theme.palette.error.main }}>Deactivate User</MenuItem>
+        <MenuItem sx={{ color: theme.palette.error.main }}>Delete User</MenuItem>
+      </Menu>
     </>
   );
 };
