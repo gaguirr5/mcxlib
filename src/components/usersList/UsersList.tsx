@@ -17,8 +17,6 @@ import {
   TableFooter,
   Menu,
   MenuItem,
-  Badge,
-  styled,
 } from '@mui/material';
 import { BlockIcon, MoreHorzIcon, PersonIcon } from '../../icons';
 import { useState } from 'react';
@@ -37,7 +35,7 @@ const UserProfile = ({ listData }: UsersListProps) => {
   const theme = useTheme();
   // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleAnchorEl = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -67,31 +65,6 @@ const UserProfile = ({ listData }: UsersListProps) => {
     },
   };
 
-  const StyledBadge = styled(Badge)(({ theme }) => ({
-    '& .MuiBadge-badge': {
-      // backgroundColor: 'red',
-      // color: '#44b700',
-      // boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-      position: 'absolute',
-      top: 12,
-      right:10,
-      width: 'auto',
-      // height: '100%',
-      borderRadius: '50%',
-      // fontSize:'.8rem',
-      // width: 'auto', // Dynamically size to fit the icon
-      // // height: "auto",
-      // fontSize:'1rem',
-      // // color:'white',
-      padding: 0, // Remove padding around the icon
-      margin: 0, // Remove margin
-      // backgroundColor: 'transparent', // No additional background
-      // display: 'flex', // Center the content
-      // alignItems: 'center',
-      // justifyContent: 'center',
-    },
-  }));
-
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -106,7 +79,6 @@ const UserProfile = ({ listData }: UsersListProps) => {
   };
 
   const userComponent = (name: string, group: string, email: string, active: boolean) => {
-    console.log('active', active);
     return (
       <Stack flexDirection='row' alignItems='stretch' padding={1}>
         <Box
@@ -117,59 +89,16 @@ const UserProfile = ({ listData }: UsersListProps) => {
             marginRight: '.5rem',
           }}
         >
-          {active && (
-            <>
-              {/* <Avatar sx={{ background: 'radial-gradient(circle, rgba(0,136,186,1) 0%, rgba(146,148,151,1) 100%)', fontSize: '2rem' }}> */}
-              {/* <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(146,148,151,1) 100%)', fontSize: '2rem' }}> */}
-              <Avatar
-                sx={{
-                  background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(96,79,249,1) 100%)',
-                  fontSize: '2rem',
-                }}
-              >
-                {/* <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(50,0,186,1) 100%)', fontSize: '2rem' }}> */}
-                {/* <Avatar sx={{ bgcolor: '#604FF9', fontSize: '2rem' }}> */}
-                <PersonIcon />
-              </Avatar>
-            </>
-          )}
-          {!active && (
-            <>
-              <StyledBadge
-                overlap='circular'
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                // variant='dot'
-                badgeContent={
-                  <BlockIcon
-                    sx={{
-                      fontSize: '.8rem', // Scale icon appropriately
-                      fill: "red", // Use fill to color the icon
-                      // fill: 'white',
-                      // stroke: 'orange',
-                      // strokeWidth: '.1',
-                      padding: 0,
-                      margin: 0,
-                    }}
-                  />
-                  
-                  // "-"
-                }
-              >
-                <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(96,79,249,1) 100%)' }}>
-                  <PersonIcon />
-                </Avatar>
-              </StyledBadge>
-              {/* <Badge
-                overlap='circular'
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                badgeContent={<BlockIcon sx={{fontSize:'.9rem', fill:'red',stroke:'orange', borderRadius:'50%'}}/>}
-              >
-                <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(96,79,249,1) 100%)' }}>
-                  <PersonIcon />
-                </Avatar>
-              </Badge> */}
-            </>
-          )}
+          <>
+            <Avatar
+              sx={{
+                background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(50,0,186,1) 100%)',
+                fontSize: '2rem',
+              }}
+            >
+              <PersonIcon />
+            </Avatar>
+          </>
         </Box>
 
         <Stack
@@ -191,11 +120,7 @@ const UserProfile = ({ listData }: UsersListProps) => {
             >
               {name}
             </Typography>
-            {/* {!active&&(
-            
-          <BlockIcon sx={{fontSize:'.8rem', color:theme.palette.error.main}}/>
-
-          )}  */}
+            {!active && <BlockIcon sx={{ fontSize: '.8rem', color: theme.palette.error.main }} />}
           </Stack>
 
           <Typography
@@ -263,7 +188,6 @@ const UserProfile = ({ listData }: UsersListProps) => {
                     onClick={handleAnchorEl}
                   >
                     <MoreHorzIcon sx={{ bgcolor: theme.palette.formBackground.light, borderRadius: '.5rem' }} />
-                    {/* <MoreHorzIcon sx={{ bgcolor: grey[300], borderRadius: '.5rem' }} /> */}
                   </IconButton>
                 </TableCell>
               </TableRow>

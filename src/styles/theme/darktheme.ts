@@ -26,9 +26,10 @@ const darktheme = createTheme({
     },
 
     gridBackground: {
-      main: '#424242',
-      light:'',
-      dark:'#2E2E2E',
+      main: '#1E1E1E',
+      //main :'#424242',
+      light: '',
+      dark: '#2E2E2E',
       contrastText: '#CCCCCC',
     },
 
@@ -42,11 +43,12 @@ const darktheme = createTheme({
       contrastText: '#CCCCCC',
     },
 
-    gridHead:{
-      main:'#4c4c4c',
-      light:'#6F6F6F',
-      dark:'#353535',
-      contrastText:'#CCC'
+    gridHead: {
+      main: '#1E1E1E',
+      //main:#4c4c4c
+      light: '#6F6F6F',
+      dark: '#353535',
+      contrastText: '#CCC',
     },
 
     //buttons
@@ -63,9 +65,10 @@ const darktheme = createTheme({
     },
 
     error: {
-      main: '#d11a2a',
+      main: '#C0201A',
       light: '#DA4754',
       dark: '#E9EDFB',
+      contrastText: '#CCC',
     },
     warning: {
       main: '#ffce44',
@@ -99,10 +102,9 @@ const darktheme = createTheme({
       dark: '#005B46',
       contrastText: '#cccccc',
     },
-    
 
     //company colors
-     //   capex: {
+    //   capex: {
     //     main: '#00ba8f',
     //     light: '#00ba8f',
     //     dark: '#00BA8F',
@@ -120,7 +122,6 @@ const darktheme = createTheme({
     //     light: '#5B33C7',
     //     dark: '#230082',
     //   },
-
 
     // buttonOne: {
     //     main: '#0088ba',
