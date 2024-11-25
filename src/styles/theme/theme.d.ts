@@ -22,6 +22,7 @@ declare module '@mui/material/styles' {
     // tabs: Palette['primary'];
     navbarBackground: Palette['primary'];
     gridHead:Palette['primary']
+    hover:Palette['primary']
   }
 
   interface PaletteOptions {
@@ -44,6 +45,7 @@ declare module '@mui/material/styles' {
     // tabs?: PaletteOptions['primary'];
     navbarBackground?: PaletteOptions['primary'];
     gridHead?:PaletteOptions['primary']
+    hover?:PaletteOptions['primary']
   }
 }
 
@@ -69,5 +71,6 @@ declare module '@mui/material/Button' {
     // tabs: true;
     navbarBackground: true;
     gridHead:true;
+    hover:true;
   }
 }

@@ -21,14 +21,16 @@ import {
 import { BlockIcon, MoreHorzIcon, PersonIcon } from '../../icons';
 import { useState } from 'react';
 
+export interface IUserList{
+  name:string;
+  group:string;
+  email:string;
+  active:boolean;
+  roles:string[]
+}
+
 export interface UsersListProps {
-  listData: {
-    name: string;
-    group: string;
-    email: string;
-    active: boolean;
-    roles: string[];
-  }[];
+  listData: IUserList[];
 }
 
 const UserProfile = ({ listData }: UsersListProps) => {
@@ -38,9 +40,16 @@ const UserProfile = ({ listData }: UsersListProps) => {
   const [rowsPerPage, setRowsPerPage] = useState(100);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const [activeItem, setActiveItem] = useState<IUserList | null>(null)
   const handleAnchorEl = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+
+  const handleUserMenu = (event: React.MouseEvent<HTMLButtonElement>, item:IUserList) =>{
+    handleAnchorEl(event)
+    setActiveItem(item)
+  }
 
   const TableBodySX = {
     '& .MuiTableRow-root:first-of-type td': {
@@ -171,11 +180,11 @@ const UserProfile = ({ listData }: UsersListProps) => {
                 key={index}
                 sx={{
                   '&:hover': {
-                    backgroundColor: 'rgba(0,0,0,0.04)',
+                    backgroundColor: theme.palette.hover.main,
                   },
                 }}
               >
-                <TableCell sx={{ padding: 0, verticalAlign: 'top' }}>
+                <TableCell sx={{ padding: 0, verticalAlign: 'top', minWidth:'14rem' }}>
                   {userComponent(item.name, item.group, item.email, item.active)}
                 </TableCell>
                 <TableCell sx={{ fontSize: '.8rem' }}>{item.roles.join(',')}</TableCell>
@@ -185,7 +194,7 @@ const UserProfile = ({ listData }: UsersListProps) => {
                     aria-controls={open ? 'basic-menu' : undefined}
                     aria-haspopup='true'
                     aria-expanded={open ? 'true' : undefined}
-                    onClick={handleAnchorEl}
+                    onClick={(e) => handleUserMenu(e, item)}
                   >
                     <MoreHorzIcon sx={{ bgcolor: theme.palette.formBackground.light, borderRadius: '.5rem' }} />
                   </IconButton>
@@ -222,7 +231,7 @@ const UserProfile = ({ listData }: UsersListProps) => {
         }}
       >
         <MenuItem>View Profile</MenuItem>
-        <MenuItem sx={{ color: theme.palette.error.main }}>Deactivate User</MenuItem>
+        <MenuItem sx={{ color: theme.palette.error.main }}>{activeItem?.active?'Deactivate User': 'Activate User'}</MenuItem>
         <MenuItem sx={{ color: theme.palette.error.main }}>Delete User</MenuItem>
       </Menu>
     </>

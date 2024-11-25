@@ -46,6 +46,9 @@ const lighttheme = createTheme({
       dark:'#AEAEAE',
       contrastText:'rgba(0,0,0,.87)'
     },
+    hover:{
+      main:'rgba(0,0,0,0.04)'
+    },
 
     //buttons
     primary: {
