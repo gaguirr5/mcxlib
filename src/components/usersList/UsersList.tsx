@@ -17,8 +17,10 @@ import {
   TableFooter,
   Menu,
   MenuItem,
+  Badge,
+  styled,
 } from '@mui/material';
-import { MoreHorzIcon, PersonIcon } from '../../icons';
+import { BlockIcon, MoreHorzIcon, PersonIcon } from '../../icons';
 import { useState } from 'react';
 
 export interface UsersListProps {
@@ -65,6 +67,16 @@ const UserProfile = ({ listData }: UsersListProps) => {
     },
   };
 
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      // backgroundColor: theme.palette.error.main, // Background color for the badge
+      // color: theme.palette.error.main, // Text/icon color
+      // fontSize: '0.1rem', // Size for the BlockIcon
+      // boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      // borderRadius: '50%', // Make it circular if desired
+    },
+  }));
+
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -78,7 +90,8 @@ const UserProfile = ({ listData }: UsersListProps) => {
     setAnchorEl(null);
   };
 
-  const userComponent = (name: string, group: string, email: string) => {
+  const userComponent = (name: string, group: string, email: string, active: boolean) => {
+    console.log('active', active);
     return (
       <Stack flexDirection='row' alignItems='stretch' padding={1}>
         <Box
@@ -89,13 +102,44 @@ const UserProfile = ({ listData }: UsersListProps) => {
             marginRight: '.5rem',
           }}
         >
-          {/* <Avatar sx={{ background: 'radial-gradient(circle, rgba(0,136,186,1) 0%, rgba(146,148,151,1) 100%)', fontSize: '2rem' }}> */}
-          {/* <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(146,148,151,1) 100%)', fontSize: '2rem' }}> */}
-          <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(96,79,249,1) 100%)', fontSize: '2rem' }}>
-          {/* <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(50,0,186,1) 100%)', fontSize: '2rem' }}> */}
-          {/* <Avatar sx={{ bgcolor: '#604FF9', fontSize: '2rem' }}> */}
-            <PersonIcon />
-          </Avatar>
+          {active && (
+            <>
+              {/* <Avatar sx={{ background: 'radial-gradient(circle, rgba(0,136,186,1) 0%, rgba(146,148,151,1) 100%)', fontSize: '2rem' }}> */}
+              {/* <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(146,148,151,1) 100%)', fontSize: '2rem' }}> */}
+              <Avatar
+                sx={{
+                  background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(96,79,249,1) 100%)',
+                  fontSize: '2rem',
+                }}
+              >
+                {/* <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(50,0,186,1) 100%)', fontSize: '2rem' }}> */}
+                {/* <Avatar sx={{ bgcolor: '#604FF9', fontSize: '2rem' }}> */}
+                <PersonIcon />
+              </Avatar>
+            </>
+          )}
+          {!active && (
+            <>
+              <StyledBadge
+                overlap='circular'
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                badgeContent={
+                  <BlockIcon
+                    sx={{
+                      fontSize: '.8rem',
+                      backgroundColor: theme.palette.error.main,
+                      color: 'white',
+                      borderRadius: '50%',
+                    }}
+                  />
+                }
+              >
+                <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(96,79,249,1) 100%)' }}>
+                  <PersonIcon />
+                </Avatar>
+              </StyledBadge>
+            </>
+          )}
         </Box>
 
         <Stack
@@ -105,16 +149,25 @@ const UserProfile = ({ listData }: UsersListProps) => {
           justifyContent='space-between'
           sx={{ lineHeight: 0.5 }}
         >
-          <Typography
-            variant='body1'
-            sx={{
-              fontWeight: 'bold',
-              fontSize: '0.8rem',
-              marginBottom: 0,
-            }}
-          >
-            {name}
-          </Typography>
+          <Stack flexDirection='row' alignItems='center'>
+            <Typography
+              variant='body1'
+              sx={{
+                fontWeight: 'bold',
+                fontSize: '0.8rem',
+                marginBottom: 0,
+                marginRight: '.1rem',
+              }}
+            >
+              {name}
+            </Typography>
+            {/* {!active&&(
+            
+          <BlockIcon sx={{fontSize:'.8rem', color:theme.palette.error.main}}/>
+
+          )}  */}
+          </Stack>
+
           <Typography
             variant='body2'
             sx={{
@@ -159,9 +212,16 @@ const UserProfile = ({ listData }: UsersListProps) => {
           </TableHead>
           <TableBody sx={TableBodySX}>
             {listData.map((item, index) => (
-              <TableRow key={index}>
+              <TableRow
+                key={index}
+                sx={{
+                  '&:hover': {
+                    backgroundColor: 'rgba(0,0,0,0.04)',
+                  },
+                }}
+              >
                 <TableCell sx={{ padding: 0, verticalAlign: 'top' }}>
-                  {userComponent(item.name, item.group, item.email)}
+                  {userComponent(item.name, item.group, item.email, item.active)}
                 </TableCell>
                 <TableCell sx={{ fontSize: '.8rem' }}>{item.roles.join(',')}</TableCell>
                 <TableCell sx={{ padding: 0, width: '1px' }}>
@@ -202,9 +262,10 @@ const UserProfile = ({ listData }: UsersListProps) => {
           'aria-labelledby': 'basic-button',
         }}
         slotProps={{
-          paper:{
-          sx:{borderRadius:'.5rem'}
-        }}}
+          paper: {
+            sx: { borderRadius: '.5rem' },
+          },
+        }}
       >
         <MenuItem>View Profile</MenuItem>
         <MenuItem sx={{ color: theme.palette.error.main }}>Deactivate User</MenuItem>
