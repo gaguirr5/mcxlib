@@ -69,11 +69,26 @@ const UserProfile = ({ listData }: UsersListProps) => {
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
-      // backgroundColor: theme.palette.error.main, // Background color for the badge
-      // color: theme.palette.error.main, // Text/icon color
-      // fontSize: '0.1rem', // Size for the BlockIcon
+      // backgroundColor: 'red',
+      // color: '#44b700',
       // boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-      // borderRadius: '50%', // Make it circular if desired
+      position: 'absolute',
+      top: 12,
+      right:10,
+      width: 'auto',
+      // height: '100%',
+      borderRadius: '50%',
+      // fontSize:'.8rem',
+      // width: 'auto', // Dynamically size to fit the icon
+      // // height: "auto",
+      // fontSize:'1rem',
+      // // color:'white',
+      padding: 0, // Remove padding around the icon
+      margin: 0, // Remove margin
+      // backgroundColor: 'transparent', // No additional background
+      // display: 'flex', // Center the content
+      // alignItems: 'center',
+      // justifyContent: 'center',
     },
   }));
 
@@ -123,21 +138,36 @@ const UserProfile = ({ listData }: UsersListProps) => {
               <StyledBadge
                 overlap='circular'
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                // variant='dot'
                 badgeContent={
                   <BlockIcon
                     sx={{
-                      fontSize: '.8rem',
-                      backgroundColor: theme.palette.error.main,
-                      color: 'white',
-                      borderRadius: '50%',
+                      fontSize: '.8rem', // Scale icon appropriately
+                      fill: "red", // Use fill to color the icon
+                      // fill: 'white',
+                      // stroke: 'orange',
+                      // strokeWidth: '.1',
+                      padding: 0,
+                      margin: 0,
                     }}
                   />
+                  
+                  // "-"
                 }
               >
                 <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(96,79,249,1) 100%)' }}>
                   <PersonIcon />
                 </Avatar>
               </StyledBadge>
+              {/* <Badge
+                overlap='circular'
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                badgeContent={<BlockIcon sx={{fontSize:'.9rem', fill:'red',stroke:'orange', borderRadius:'50%'}}/>}
+              >
+                <Avatar sx={{ background: 'linear-gradient(90deg, rgba(0,136,186,1) 0%, rgba(96,79,249,1) 100%)' }}>
+                  <PersonIcon />
+                </Avatar>
+              </Badge> */}
             </>
           )}
         </Box>
