@@ -21,12 +21,13 @@ import {
 import { BlockIcon, MoreHorzIcon, PersonIcon } from '../../icons';
 import { useState } from 'react';
 
-export interface IUserList{
-  name:string;
-  group:string;
-  email:string;
-  active:boolean;
-  roles:string[]
+export interface IUserList {
+  id: string;
+  name: string;
+  group: string;
+  email: string;
+  active: boolean;
+  roles: string[];
 }
 
 export interface UsersListProps {
@@ -37,19 +38,18 @@ const UserProfile = ({ listData }: UsersListProps) => {
   const theme = useTheme();
   // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(100);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const [activeItem, setActiveItem] = useState<IUserList | null>(null)
+  const [activeItem, setActiveItem] = useState<IUserList | null>(null);
   const handleAnchorEl = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-
-  const handleUserMenu = (event: React.MouseEvent<HTMLButtonElement>, item:IUserList) =>{
-    handleAnchorEl(event)
-    setActiveItem(item)
-  }
+  const handleUserMenu = (event: React.MouseEvent<HTMLButtonElement>, item: IUserList) => {
+    handleAnchorEl(event);
+    setActiveItem(item);
+  };
 
   const TableBodySX = {
     '& .MuiTableRow-root:first-of-type td': {
@@ -86,6 +86,11 @@ const UserProfile = ({ listData }: UsersListProps) => {
   const handleCloseAnchor = () => {
     setAnchorEl(null);
   };
+
+  const handleUpdateUser = (action: 'remove' | 'add') => {
+    return { action: action, itemId: activeItem?.id };
+  };
+
 
   const userComponent = (name: string, group: string, email: string, active: boolean) => {
     return (
@@ -184,17 +189,17 @@ const UserProfile = ({ listData }: UsersListProps) => {
                   },
                 }}
               >
-                <TableCell sx={{ padding: 0, verticalAlign: 'top', minWidth:'14rem' }}>
+                <TableCell sx={{ padding: 0, verticalAlign: 'top', minWidth: '14rem' }}>
                   {userComponent(item.name, item.group, item.email, item.active)}
                 </TableCell>
-                <TableCell sx={{ fontSize: '.8rem' }}>{item.roles.join(',')}</TableCell>
+                <TableCell sx={{ fontSize: '.8rem' }}>{item.roles.join(', ')}</TableCell>
                 <TableCell sx={{ padding: 0, width: '1px' }}>
                   <IconButton
                     id='basic-button'
                     aria-controls={open ? 'basic-menu' : undefined}
                     aria-haspopup='true'
                     aria-expanded={open ? 'true' : undefined}
-                    onClick={(e) => handleUserMenu(e, item)}
+                    onClick={e => handleUserMenu(e, item)}
                   >
                     <MoreHorzIcon sx={{ bgcolor: theme.palette.formBackground.light, borderRadius: '.5rem' }} />
                   </IconButton>
@@ -205,7 +210,7 @@ const UserProfile = ({ listData }: UsersListProps) => {
           <TableFooter>
             <TableRow>
               <TablePagination
-                rowsPerPageOptions={[100, 200, 500, { label: 'All', value: -1 }]}
+                rowsPerPageOptions={[50, 100, 150, { label: 'All', value: -1 }]}
                 count={listData.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
@@ -230,9 +235,21 @@ const UserProfile = ({ listData }: UsersListProps) => {
           },
         }}
       >
-        <MenuItem>View Profile</MenuItem>
-        <MenuItem sx={{ color: theme.palette.error.main }}>{activeItem?.active?'Deactivate User': 'Activate User'}</MenuItem>
-        <MenuItem sx={{ color: theme.palette.error.main }}>Delete User</MenuItem>
+        <MenuItem onClick={() => console.log('Click on View Profile')}>View Profile</MenuItem>
+        <MenuItem
+          sx={{ color: theme.palette.error.main }}
+          onClick={() => handleUpdateUser(activeItem?.active ? 'remove' : 'add')}
+        >
+          {activeItem?.active ? 'Deactivate User' : 'Activate User'}
+        </MenuItem>
+        <MenuItem
+          sx={{ color: theme.palette.error.main }}
+          onClick={() => {
+            if (activeItem) return activeItem.id;
+          }}
+        >
+          Delete User
+        </MenuItem>
       </Menu>
     </>
   );
