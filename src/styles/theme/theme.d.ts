@@ -21,8 +21,8 @@ declare module '@mui/material/styles' {
     requiredFieldText: Palette['primary'];
     // tabs: Palette['primary'];
     navbarBackground: Palette['primary'];
-    gridHead:Palette['primary']
-    hover:Palette['primary']
+    gridHead: Palette['primary'];
+    hover: Palette['primary'];
   }
 
   interface PaletteOptions {
@@ -33,7 +33,7 @@ declare module '@mui/material/styles' {
     // opex?: PaletteOptions['primary'];
     // gridBlue?: PaletteOptions['primary'];
     // cnxPurple?: PaletteOptions['primary'];
-    pageBackground?:PaletteOptions['primary'];
+    pageBackground?: PaletteOptions['primary'];
     gridBackground?: PaletteOptions['primary'];
     formBackground?: PaletteOptions['primary'];
     defaultText?: PaletteOptions['primary'];
@@ -44,8 +44,8 @@ declare module '@mui/material/styles' {
     requiredFieldText?: PaletteOptions['primary'];
     // tabs?: PaletteOptions['primary'];
     navbarBackground?: PaletteOptions['primary'];
-    gridHead?:PaletteOptions['primary']
-    hover?:PaletteOptions['primary']
+    gridHead?: PaletteOptions['primary'];
+    hover?: PaletteOptions['primary'];
   }
 }
 
@@ -59,7 +59,7 @@ declare module '@mui/material/Button' {
     // opex: true;
     // gridBlue: true;
     // cnxPurple: true;
-    pageBackground:true;
+    pageBackground: true;
     gridBackground: true;
     formBackground: true;
     defaultText: true;
@@ -70,7 +70,7 @@ declare module '@mui/material/Button' {
     requiredFieldText: true;
     // tabs: true;
     navbarBackground: true;
-    gridHead:true;
-    hover:true;
+    gridHead: true;
+    hover: true;
   }
 }

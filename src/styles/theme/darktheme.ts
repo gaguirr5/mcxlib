@@ -51,8 +51,8 @@ const darktheme = createTheme({
       contrastText: '#CCC',
     },
 
-    hover:{
-      main:'#424242'
+    hover: {
+      main: '#424242',
     },
 
     //buttons

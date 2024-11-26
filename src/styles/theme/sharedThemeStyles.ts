@@ -14,7 +14,5 @@
 //     }
 //   }
 // }
-export const sharedTypography = {
-    
-}
-export const sharedComponents = {}
+export const sharedTypography = {};
+export const sharedComponents = {};

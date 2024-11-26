@@ -1,12 +1,12 @@
-import { Box } from '@mui/material'
-import UserProfile, { UserProfileProps } from '../UserProfile'
+import { Box } from '@mui/material';
+import UserProfile, { UserProfileProps } from '../UserProfile';
 
-const Example = ({username, userEmail}:UserProfileProps) =>{
-    return (
-        <Box sx={{display:'flex', width:'100%'}}>
-            <UserProfile username={username} userEmail={userEmail}/>
-        </Box>
-    )
-}
+const Example = ({ username, userEmail }: UserProfileProps) => {
+  return (
+    <Box sx={{ display: 'flex', width: '100%' }}>
+      <UserProfile username={username} userEmail={userEmail} />
+    </Box>
+  );
+};
 
-export default Example
+export default Example;

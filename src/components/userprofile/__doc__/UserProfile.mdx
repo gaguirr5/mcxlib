@@ -1,7 +1,7 @@
-import { Meta, Story, Canvas } from "@storybook/blocks";
-import * as UserProfileStories from "./UserProfile.stories"; // Import all exported stories
+import { Meta, Story, Canvas } from '@storybook/blocks';
+import * as UserProfileStories from './UserProfile.stories'; // Import all exported stories
 
-<Meta title="Pages/UserProfile" of={UserProfileStories} />
+<Meta title='Pages/UserProfile' of={UserProfileStories} />
 
 # UserProfile
 
@@ -12,7 +12,7 @@ A `UserProfile` component that displays user information in a styled card. It is
 ## Example
 
 <Canvas>
-  <Story name="Default" of={UserProfileStories.Default} />
+  <Story name='Default' of={UserProfileStories.Default} />
 </Canvas>
 
 ---
@@ -22,15 +22,11 @@ A `UserProfile` component that displays user information in a styled card. It is
 To use the `UserProfile` component in your project, import it as follows:
 
 ```tsx
-import UserProfile from "@gaguirr5/mcxlib/components/userprofile";
+import UserProfile from '@gaguirr5/mcxlib/components/userprofile';
 
 const Example = () => {
-  return (
-    <UserProfile 
-      username='Jane Doe'
-      userEmail='Jane@doe.com'
-    />
-  );
+  return <UserProfile username='Jane Doe' userEmail='Jane@doe.com' />;
 };
 
 export default Example;
+```
