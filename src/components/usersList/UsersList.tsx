@@ -19,7 +19,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import { BlockIcon, MoreHorzIcon, PersonIcon } from '../../icons';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export interface IUserList {
   id: string;
@@ -74,7 +74,7 @@ const UserProfile = ({ listData }: UsersListProps) => {
     },
   };
 
-  const handleChangePage = (_event: unknown, newPage: number) => {
+  const handleChangePage = (_event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
   };
 
@@ -91,6 +91,31 @@ const UserProfile = ({ listData }: UsersListProps) => {
     return { action: action, itemId: activeItem?.id };
   };
 
+  function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+
+  type Order = 'asc' | 'desc';
+
+  function getComparator<Key extends keyof any>(
+    order: Order,
+    orderBy: Key,
+  ): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
+    return order === 'desc'
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+
+  const visibleRows = useMemo(
+    () => [...listData].sort(getComparator('asc', 'name')).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+    [page, rowsPerPage],
+  );
 
   const userComponent = (name: string, group: string, email: string, active: boolean) => {
     return (
@@ -180,7 +205,7 @@ const UserProfile = ({ listData }: UsersListProps) => {
             </TableRow>
           </TableHead>
           <TableBody sx={TableBodySX}>
-            {listData.map((item, index) => (
+            {visibleRows.map((item, index) => (
               <TableRow
                 key={index}
                 sx={{
@@ -189,7 +214,7 @@ const UserProfile = ({ listData }: UsersListProps) => {
                   },
                 }}
               >
-                <TableCell sx={{ padding: 0, verticalAlign: 'top', minWidth: '14rem' }}>
+                <TableCell sx={{ padding: 0, verticalAlign: 'top', minWidth: '16rem' }}>
                   {userComponent(item.name, item.group, item.email, item.active)}
                 </TableCell>
                 <TableCell sx={{ fontSize: '.8rem' }}>{item.roles.join(', ')}</TableCell>
@@ -211,6 +236,7 @@ const UserProfile = ({ listData }: UsersListProps) => {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[50, 100, 150, { label: 'All', value: -1 }]}
+                colSpan={3}
                 count={listData.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
