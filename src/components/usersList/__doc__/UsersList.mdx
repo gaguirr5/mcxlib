@@ -1,0 +1,25 @@
+import { Meta, Story, Canvas } from '@storybook/blocks';
+import * as UsersListStories from './UsersList.stories'; 
+
+<Meta title = 'UsersList' of={UsersListStories} />
+
+#Users List 
+
+A `UsersList` component that displays that uses an mui table to display user information with a menu that allows the user to view profile, activate/deactive and delete user.
+
+## Example
+
+<Canvas of={UsersListStories.Sample}/>
+
+#Usage 
+
+To use the `UsersList` component in your project, import as follows
+
+```tsx
+import UsersList from '@gaguirr5/mcxlib/components/UsersList
+
+const Example = () =>{
+    return <UsersList listData={ListofUsers}/>
+}
+
+export default Example;

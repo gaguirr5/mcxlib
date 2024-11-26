@@ -5,6 +5,7 @@ import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material/styles';
 import UserProfile from '../UserProfile';
 import lighttheme from '../../../styles/theme/lighttheme';
+import '@testing-library/jest-dom'
 
 describe('UserProfile component', () => {
   // const theme = createTheme();

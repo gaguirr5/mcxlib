@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Example from './Example';
+import { faker } from '@faker-js/faker';
 
 const meta: Meta<typeof Example> = {
   title: 'Pages/UserProfile',
@@ -12,7 +13,7 @@ type Story = StoryObj<typeof Example>;
 
 export const Default: Story = {
   args: {
-    username: 'John Doe',
-    userEmail: 'john@doe.com',
+    username: faker.person.fullName(),
+    userEmail: faker.internet.email(),
   },
 };
