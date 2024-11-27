@@ -3,7 +3,7 @@ import Example from './Example';
 import { faker } from '@faker-js/faker';
 
 const meta: Meta<typeof Example> = {
-  title: 'Pages/UserProfile',
+  title: 'UserProfile',
   component: Example,
 };
 

@@ -31,10 +31,10 @@ export interface IUserList {
 }
 
 export interface UsersListProps {
-  listData: IUserList[];
+  listData: IUserList[] | [];
 }
 
-const UserProfile = ({ listData }: UsersListProps) => {
+const UsersList = ({ listData }: UsersListProps) => {
   const theme = useTheme();
   // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [page, setPage] = useState(0);
@@ -135,7 +135,7 @@ const UserProfile = ({ listData }: UsersListProps) => {
                 fontSize: '2rem',
               }}
             >
-              <PersonIcon />
+              <PersonIcon data-testid='PersonIcon' />
             </Avatar>
           </>
         </Box>
@@ -159,7 +159,9 @@ const UserProfile = ({ listData }: UsersListProps) => {
             >
               {name}
             </Typography>
-            {!active && <BlockIcon sx={{ fontSize: '.8rem', color: theme.palette.error.main }} />}
+            {!active && (
+              <BlockIcon data-testid={`BlockIcon${name}-${email}`} sx={{ fontSize: '.8rem', color: theme.palette.error.main }} />
+            )}
           </Stack>
 
           <Typography
@@ -226,7 +228,10 @@ const UserProfile = ({ listData }: UsersListProps) => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={e => handleUserMenu(e, item)}
                   >
-                    <MoreHorzIcon sx={{ bgcolor: theme.palette.formBackground.light, borderRadius: '.5rem' }} />
+                    <MoreHorzIcon
+                      data-testid='MoreHorizontalIcon'
+                      sx={{ bgcolor: theme.palette.formBackground.light, borderRadius: '.5rem' }}
+                    />
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -281,4 +286,4 @@ const UserProfile = ({ listData }: UsersListProps) => {
   );
 };
 
-export default UserProfile;
+export default UsersList;
